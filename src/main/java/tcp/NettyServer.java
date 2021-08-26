@@ -24,6 +24,12 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
  *  + 处理任务队列中的任务，即runAllTasks
  *
  *  每个work-NIOEventLoop处理业务时，会使用pipeline，pipeline中包含了channel，即通过pipeline可以获取对应的管道，管道中维护了很多处理器
+ *  NioEventLoop内部采用串行化设计，从消息的 读取->解码->处理->编码->发送， 始终由NioEventLoop负责
+ *  NioEventLoopGroup下包含多个NioEventLoop
+ *  + 每个NioEventLoop中包含一个Selector，一个taskQueue
+ *  + 每个NioEventLoop的Selector上可以注册监听多个NioChannel
+ *  + 每个NioChannel都会绑定在唯一的NioEventLoop上
+ *  + 每个NioChannel都绑定有一个自己的ChannelPipeline
  *
  */
 public class NettyServer {
