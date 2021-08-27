@@ -18,6 +18,7 @@ public class TestServer {
                     .channel(NioServerSocketChannel.class)
                     .childHandler(new TestServerInitializer());
             ChannelFuture future = serverBootstrap.bind(7000).sync();
+            //对于异步操作的结果进行监听， Netty的异步是基于Future和Callback机制的
             future.addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture channelFuture) throws Exception {
