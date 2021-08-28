@@ -32,8 +32,8 @@ public class MyServer {
                             //Http数据在传输过程中是分段的，HttpObjectAggregator可以将多个段聚合，浏览器在发送大量数据时，会发送多次Http请求
                             pipeline.addLast(new HttpObjectAggregator(8192));
                             /*
-                            WebSocket的数据是以帧（Frame）的形似传递的
-                            WebSocketServerProtocolHandler的核心功能是将Http协议升级为WS协议，保持长连接
+                             WebSocket的数据是以帧（Frame）的形似传递的
+                             WebSocketServerProtocolHandler的核心功能是将Http协议升级为WS协议，保持长连接
                              */
                             pipeline.addLast(new WebSocketServerProtocolHandler("/hello2"));
                             //利用自定义的Handler来处理业务逻辑
