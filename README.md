@@ -1,8 +1,8 @@
 # Netty 样例
 
-### 1. 基于Netty实现的TCP服务器
+### 1. 基于Netty实现TCP服务器
 
-### 2. 基于Netty实现的UDP服务器
+### 2. 基于Netty实现UDP服务器
 
 ### 3. 基于Netty实现HTTP服务器
 
