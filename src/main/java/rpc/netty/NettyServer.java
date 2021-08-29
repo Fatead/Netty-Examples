@@ -32,7 +32,7 @@ public class NettyServer {
                             pipeline.addLast(new NettyServerHandler());
                         }
                     });
-            ChannelFuture channelFuture = serverBootstrap.bind(hostName,port).sync();
+            ChannelFuture channelFuture = serverBootstrap.bind(hostName, port).sync();
             System.out.println("服务器提供方开始提供服务");
             channelFuture.channel().closeFuture().sync();
         }finally {
