@@ -12,8 +12,8 @@ import io.netty.handler.codec.string.StringEncoder;
  */
 public class NettyServer {
 
-    public static void startServer(String hostName,int port){
-
+    public static void startServer(String hostName,int port) throws InterruptedException {
+        startServer0(hostName,port);
     }
 
     private static void startServer0(String hostName, int port) throws InterruptedException {

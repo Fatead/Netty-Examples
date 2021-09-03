@@ -21,8 +21,14 @@ public class NettyClient {
 
     /**
      * 编写方法使用代理模式获取一个代理对象
+     * newProxyInstance方法有三个参数
+     * ClassLoader : 使用哪个类加载器去加载代理对象
+     * Class</?>[] : 动态代理类需要实现的接口
+     * InvocationHandler : 动态代理的方法在执行时，
+     * 会调用InvocationHandler里面的invoke方法去执行
      */
     public Object getBean(final Class<?> serviceClass, final String providerName){
+        //使用动态代理，在运行时创建一个给定接口的新类，代理的是接口，在运行时才知道具体的实现
         return Proxy.newProxyInstance(Thread.currentThread().getContextClassLoader(),
                 new Class<?>[]{serviceClass},(proxy,method,args)->{
                     System.out.println("(proxy, method, args) 进入...." + (++count) + " 次");
@@ -34,6 +40,7 @@ public class NettyClient {
                     return executor.submit(client).get();
                 });
     }
+
 
     /**
      * 初始化客户端
@@ -54,7 +61,7 @@ public class NettyClient {
                         channelPipeline.addLast(client);
                     }
                 });
-        bootstrap.bind("127.0.0.1",7000).sync();
+        bootstrap.connect("127.0.0.1",7000).sync();
     }
 
 }
